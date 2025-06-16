@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Weather App</title>
+  <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+  />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap"
+    rel="stylesheet"
+  />
+</head>
+<body>
+  <header id="head">
+    <div id="weather"><i class="fa-solid fa-cloud-sun"></i> Weather App</div>
+    <div class="nav-item"><a href="">Home</a></div>
+    <div class="nav-item"><a href="">About Us</a></div>
+    <div id="search-box">
+        <form action="/weather" method="POST">
+            <input type="text" placeholder="Search for City" name="city" id="search-input" />
+            <button type="submit" id="search-btn">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+      
+    </div>
+  </header>
+  <h1 class="cityname">Weather in {{city}}</h1>
+  <div class="main-container">
+    <div class="box">
+      <div class="heading">
+        <i class="fa-solid fa-temperature-three-quarters icon temp"></i> Temperature
+      </div>
+      <div class="data">{{temp}}°C</div>
+      <div class="extra">
+        <p>Avg Temp: {{avg_temp}}°C</p>
+        <p>Min Temp: {{min_temp}}°C</p>
+        <p>Max Temp: {{max_temp}}°C</p>
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="heading">
+        <i class="fa-solid fa-droplet icon humidity"></i> Humidity
+      </div>
+      <div class="data">{{humidity}}%</div>
+      <div class="extra">
+        <p>Avg_Humidity: {{avg_humidity}}%</p>
+        <p>Chance of Rain:{{chance}}%</p>
+        <p>Dew Point:{{dewpoint_c}}°C</p>
+      </div>
+    </div>
+
+    <div class="box">
+      <div class="heading">
+        <i class="fa-solid fa-wind icon wind"></i> Wind
+      </div>
+      <div class="data">{{wind}}km/h</div>
+      <div class="extra">
+        <p>Speed: {{wind_kph}} km/h</p>
+        <p>Direction:{{wind_dir}}</p>
+        <p>Degree:{{wind_degree}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="cities-container">
+  {% for c in cities %}
+  <div class="city-box">
+    <h3>{{ c.city }}</h3>
+    <p>Temperature: {{ c.temp }}°C</p>
+    <p>Humidity: {{ c.humidity }}%</p>
+    <p>Wind: {{ c.wind_kph }} km/h</p>
+  </div>
+  {% endfor %}
+</div>
+<h4 class="watermark">Created By Syed Vaseem Basha</h4>
+</div>
+
+</body>
+</html>
